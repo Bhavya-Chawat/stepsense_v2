@@ -1,0 +1,17 @@
+ALTER TABLE session_summary
+  ADD COLUMN IF NOT EXISTS gait_speed numeric,
+  ADD COLUMN IF NOT EXISTS stance_time numeric,
+  ADD COLUMN IF NOT EXISTS swing_time numeric,
+  ADD COLUMN IF NOT EXISTS step_length numeric,
+  ADD COLUMN IF NOT EXISTS gait_variability numeric,
+  ADD COLUMN IF NOT EXISTS foot_clearance numeric,
+  ADD COLUMN IF NOT EXISTS peak_pressure_zones jsonb DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS pti_zones jsonb DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS time_to_peak_pressure jsonb DEFAULT '{}'::jsonb,
+  ADD COLUMN IF NOT EXISTS cop_progression text,
+  ADD COLUMN IF NOT EXISTS peak_acceleration numeric,
+  ADD COLUMN IF NOT EXISTS acceleration_variability numeric,
+  ADD COLUMN IF NOT EXISTS peak_angular_velocity numeric,
+  ADD COLUMN IF NOT EXISTS max_temperature numeric,
+  ADD COLUMN IF NOT EXISTS temp_differential_lr numeric,
+  ADD COLUMN IF NOT EXISTS high_humidity_time_sec numeric;

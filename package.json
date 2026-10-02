@@ -1,0 +1,31 @@
+{
+  "name": "stepsense-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StepSense - Smart Insole Gait Analysis & Health Monitoring Platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:mobile": "npm run start --workspace=apps/mobile",
+    "dev:mobile:web": "npm run web --workspace=apps/mobile",
+    "build:web": "npm run build --workspace=apps/web",
+    "lint:web": "npm run lint --workspace=apps/web",
+    "install:all": "npm install"
+  },
+  "keywords": [
+    "stepsense",
+    "smart-insole",
+    "gait-analysis",
+    "diabetic-care",
+    "health-monitoring",
+    "react-native",
+    "expo",
+    "vite",
+    "supabase"
+  ],
+  "author": "StepSense Team",
+  "license": "MIT"
+}

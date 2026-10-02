@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties: Light Theme ─────────────────────────── */
+:root {
+  --color-page:                 #F4F6F8;
+  --color-card:                 #FFFFFF;
+  --color-card-subtle:          #F9FAFB;
+  --color-border:               #E8ECEF;
+
+  --color-ink-primary:          #1C2533;
+  --color-ink-secondary:        #5A6878;
+  --color-ink-tertiary:         #8A96A3;
+
+  --color-accent-teal:          #2A8FA0;
+  --color-accent-teal-light:    #3AAFBE;
+  --color-accent-teal-muted:    #E0F4F7;
+
+  --color-status-good:          #3A9E7E;
+  --color-status-good-bg:       #EBF7F3;
+  --color-status-moderate:      #C49A3A;
+  --color-status-moderate-bg:   #FBF4E5;
+  --color-status-critical:      #B85252;
+  --color-status-critical-bg:   #FBEAEA;
+
+  --radius: 0.5rem;
+  --transition-base: 200ms ease-out;
+}
+
+/* ── CSS Custom Properties: Dark Theme ──────────────────────────── */
+.dark {
+  --color-page:                 #141A22;
+  --color-card:                 #1E2733;
+  --color-card-subtle:          #192029;
+  --color-border:               #2C3A47;
+
+  --color-ink-primary:          #E8EDF2;
+  --color-ink-secondary:        #8A96A8;
+  --color-ink-tertiary:         #5A6878;
+
+  --color-accent-teal:          #3AAFBE;
+  --color-accent-teal-light:    #50C8D5;
+  --color-accent-teal-muted:    #1A3A42;
+
+  --color-status-good:          #4ABFA0;
+  --color-status-good-bg:       #162820;
+  --color-status-moderate:      #D4AE5A;
+  --color-status-moderate-bg:   #2A2010;
+  --color-status-critical:      #C96060;
+  --color-status-critical-bg:   #2A1414;
+}
+
+/* ── Base Styles ────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-page text-ink-primary font-sans;
+    transition: background-color 0.3s ease, color 0.2s ease;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-teal-muted);
+    color: var(--color-accent-teal);
+  }
+}
+
+/* ── Component Layer ────────────────────────────────────────────── */
+@layer components {
+  /* Card */
+  .card {
+    @apply bg-card border border-border rounded-xl shadow-none;
+    transition: transform var(--transition-base);
+  }
+  .card:hover {
+    /* No shadow on hover, purely flat design */
+  }
+
+  /* Clickable card */
+  .card-interactive {
+    @apply card cursor-pointer;
+  }
+  .card-interactive:hover {
+    transform: translateY(-1px);
+    @apply shadow-card-hover;
+  }
+
+  /* Premium badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest;
+  }
+  .badge-good     { @apply badge; color: var(--color-status-good);     background-color: var(--color-status-good-bg); }
+  .badge-moderate { @apply badge; color: var(--color-status-moderate); background-color: var(--color-status-moderate-bg); }
+  .badge-critical { @apply badge; color: var(--color-status-critical); background-color: var(--color-status-critical-bg); }
+
+  /* Subtle section divider label */
+  .section-label {
+    @apply text-[10px] font-bold uppercase tracking-widest text-ink-tertiary;
+  }
+
+  /* Glassmorphism panel — for overlays */
+  .glass {
+    backdrop-filter: blur(12px) saturate(1.4);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+  .dark .glass {
+    background-color: rgba(20, 26, 34, 0.8);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Sidebar item */
+  .sidebar-item {
+    @apply w-full flex items-center space-x-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-150;
+    color: var(--color-ink-secondary);
+  }
+  .sidebar-item:hover {
+    background-color: var(--color-accent-teal-muted);
+    color: var(--color-accent-teal);
+  }
+  .sidebar-item.active {
+    background-color: var(--color-accent-teal-muted);
+    color: var(--color-accent-teal);
+    font-weight: 600;
+  }
+  .dark .sidebar-item.active {
+    background-color: #1A3A42;
+    color: var(--color-accent-teal-light);
+  }
+
+  /* Input */
+  .input {
+    @apply w-full px-3 py-2.5 text-sm rounded-lg border border-border bg-page text-ink-primary;
+    @apply focus:outline-none focus:ring-2 focus:ring-accent-teal focus:ring-opacity-30 focus:border-accent-teal;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white;
+    background-color: var(--color-accent-teal);
+    transition: background-color var(--transition-base), transform var(--transition-base);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-accent-teal-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium;
+    color: var(--color-ink-secondary);
+    transition: background-color var(--transition-base), color var(--transition-base);
+  }
+  .btn-ghost:hover {
+    background-color: var(--color-border);
+    color: var(--color-ink-primary);
+  }
+
+  /* Risk row */
+  .risk-row {
+    @apply flex items-center justify-between p-3.5 rounded-xl border border-border;
+    background-color: var(--color-card-subtle);
+    transition: background-color var(--transition-base);
+  }
+  .risk-row:hover {
+    background-color: var(--color-accent-teal-muted);
+  }
+
+  /* Live dot pulse */
+  .live-dot {
+    @apply w-2 h-2 rounded-full;
+    background-color: var(--color-status-good);
+    box-shadow: 0 0 0 0 var(--color-status-good);
+    animation: livePulse 1.8s ease-in-out infinite;
+  }
+}
+
+/* ── Utility Layer ──────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance   { text-wrap: balance; }
+  .scrollbar-thin { scrollbar-width: thin; }
+  .no-scrollbar   { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  .animate-in     { animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+}
+
+/* ── Keyframes ─────────────────────────────────────────────────── */
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(58, 158, 126, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(58, 158, 126, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(58, 158, 126, 0); }
+}
+
+/* Dark mode range input */
+.dark input[type="range"] { accent-color: var(--color-accent-teal); }
+input[type="range"]       { accent-color: var(--color-accent-teal); }
+
+/* Scrollbar styling for webkit */
+::-webkit-scrollbar             { width: 4px; height: 4px; }
+::-webkit-scrollbar-track       { background: transparent; }
+::-webkit-scrollbar-thumb       { background: var(--color-border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-ink-tertiary); }
+
+/* ── Print Specifics ────────────────────────────────────────────── */
+@media print {
+  body.print-ai-only * {
+    visibility: hidden;
+  }
+  body.print-ai-only .ai-report-printable,
+  body.print-ai-only .ai-report-printable * {
+    visibility: visible;
+  }
+  body.print-ai-only .ai-report-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
